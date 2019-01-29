@@ -18,6 +18,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dpI-O5-1Za">
+                                <rect key="frame" x="0.0" y="20" width="375" height="598"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="KAm-UF-iCY">
+                                        <rect key="frame" x="177.5" y="289" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="KAm-UF-iCY" firstAttribute="centerX" secondItem="dpI-O5-1Za" secondAttribute="centerX" id="IkT-y7-QUh"/>
+                                    <constraint firstItem="KAm-UF-iCY" firstAttribute="centerY" secondItem="dpI-O5-1Za" secondAttribute="centerY" id="dHG-nO-QcV"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There are no movies for the request" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iW6-y1-87d">
                                 <rect key="frame" x="25" y="298.5" width="325" height="70"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
@@ -116,9 +129,13 @@
                         <constraints>
                             <constraint firstItem="iW6-y1-87d" firstAttribute="centerX" secondItem="3fy-S6-5yd" secondAttribute="centerX" id="9Tu-t8-Jsi"/>
                             <constraint firstItem="6Nn-Jj-YA7" firstAttribute="leading" secondItem="vkO-W4-dQq" secondAttribute="leading" id="FMZ-L2-xdA"/>
+                            <constraint firstItem="dpI-O5-1Za" firstAttribute="top" secondItem="vkO-W4-dQq" secondAttribute="top" id="J9D-gW-TPp"/>
                             <constraint firstItem="iW6-y1-87d" firstAttribute="centerY" secondItem="3fy-S6-5yd" secondAttribute="centerY" id="Ph0-rE-tyu"/>
                             <constraint firstItem="iW6-y1-87d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3fy-S6-5yd" secondAttribute="leading" constant="16" id="RrK-fC-bdm"/>
+                            <constraint firstItem="vkO-W4-dQq" firstAttribute="bottom" secondItem="dpI-O5-1Za" secondAttribute="bottom" id="YVx-RX-UyR"/>
                             <constraint firstAttribute="bottom" secondItem="6Nn-Jj-YA7" secondAttribute="bottom" id="eNA-1m-Qoh"/>
+                            <constraint firstItem="vkO-W4-dQq" firstAttribute="trailing" secondItem="dpI-O5-1Za" secondAttribute="trailing" id="jtG-vO-L62"/>
+                            <constraint firstItem="dpI-O5-1Za" firstAttribute="leading" secondItem="vkO-W4-dQq" secondAttribute="leading" id="ngu-K1-goV"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iW6-y1-87d" secondAttribute="trailing" constant="16" id="oDw-EB-790"/>
                             <constraint firstItem="vkO-W4-dQq" firstAttribute="trailing" secondItem="6Nn-Jj-YA7" secondAttribute="trailing" id="rnd-nT-gxa"/>
                             <constraint firstItem="6Nn-Jj-YA7" firstAttribute="top" secondItem="3fy-S6-5yd" secondAttribute="top" id="san-J3-c6g"/>
@@ -130,6 +147,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="emptyDatasetLabel" destination="iW6-y1-87d" id="7a9-X8-3QY"/>
+                        <outlet property="progressView" destination="dpI-O5-1Za" id="Cn0-QF-P6Q"/>
                         <outlet property="tableView" destination="6Nn-Jj-YA7" id="U0a-vB-sKU"/>
                     </connections>
                 </viewController>

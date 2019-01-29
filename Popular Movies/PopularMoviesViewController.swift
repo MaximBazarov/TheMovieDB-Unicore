@@ -2,7 +2,7 @@
 import UIKit
 
 class PopularMoviesViewController: UIViewController {
-
+    
     var props: PopularMoviesProps? {
         didSet {
             guard isViewLoaded else { return }
@@ -12,17 +12,55 @@ class PopularMoviesViewController: UIViewController {
     
     @IBOutlet private weak var emptyDatasetLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var progressView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // So here we set the show case data to see how our view works
+        self.props = PopularMoviesShowCase.firstPage
+        
         render()
     }
     
     private func render() {
         guard let props = props else { return }
-        // .. here we going to render the props
+        
+        switch props.status {
+            
+        case .loading:
+            progressView.isHidden = false
+            
+        case .empty:
+            tableView.isHidden = true
+            progressView.isHidden = true
+            
+        case .failure(_, let message):
+            tableView.isHidden = true
+            progressView.isHidden = true
+            alert(message)
+
+        case .success(_):
+            tableView.isHidden = false
+            progressView.isHidden = true
+            tableView.reloadData()
+            
+        case .loadingPage:
+            tableView.isHidden = false
+            progressView.isHidden = false
+        }
+        
+        emptyDatasetLabel.isHidden = !tableView.isHidden
     }
     
+    private func alert(_ message: String) {
+        let alert = UIAlertController(
+            title: "ERROR",
+            message: message,
+            preferredStyle: .alert
+        )
+        present(alert, animated: true)
+    }
     private var movies: [PopularMoviesProps.Movie] {
         return props?.movies ?? []
     }

@@ -10,7 +10,7 @@ struct PopularMoviesProps  {
         case empty
         case loading
         case loadingPage
-        case success(loadNextPage: PlainCommand)
+        case success(loadNextPage: PlainCommand?)
         case failure(reload: PlainCommand?, error: String)
     }
     
