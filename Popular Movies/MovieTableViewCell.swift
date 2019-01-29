@@ -5,10 +5,6 @@ class MovieTableViewCell: UITableViewCell {
     
     static let identifier: String = "MovieCell"
     
-    static var nib: UINib {
-        return UINib(nibName: identifier, bundle: Bundle(for: self))
-    }
-
     var props: PopularMoviesProps.Movie? {
         didSet {
             render()
