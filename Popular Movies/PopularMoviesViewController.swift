@@ -10,6 +10,9 @@ class PopularMoviesViewController: UIViewController {
         }
     }
     
+    @IBOutlet private weak var emptyDatasetLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         render()
