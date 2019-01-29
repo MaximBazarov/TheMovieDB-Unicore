@@ -1,5 +1,7 @@
 # TheMovieDB
 
+![Application Screens](docs/screens.png)
+
 Using open API of themoviedb.org create an application with these screens:
 
 ## Popular movies
