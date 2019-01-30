@@ -6,61 +6,52 @@ class PopularMoviesViewController: UIViewController {
     var props: PopularMoviesProps? {
         didSet {
             guard isViewLoaded else { return }
-            render()
+            view.setNeedsLayout()
         }
     }
     
-    @IBOutlet private weak var emptyDatasetLabel: UILabel!
+    @IBOutlet private weak var messageLabel: UILabel!
+    @IBOutlet private weak var errorTitleLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var progressView: UIView!
+    @IBAction func reloadButtonAction(_ sender: Any) {
+        props?.refresh?.execute()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // So here we set the show case data to see how our view works
         self.props = PopularMoviesShowCase.firstPage
-        
-        render()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        render()
+    }
+
     private func render() {
         guard let props = props else { return }
         
-        switch props.status {
-            
-        case .loading:
-            progressView.isHidden = false
-            
-        case .empty:
-            tableView.isHidden = true
-            progressView.isHidden = true
-            
-        case .failure(_, let message):
-            tableView.isHidden = true
-            progressView.isHidden = true
-            alert(message)
-
-        case .success(_):
-            tableView.isHidden = false
-            progressView.isHidden = true
-            tableView.reloadData()
-            
-        case .loadingPage:
-            tableView.isHidden = false
-            progressView.isHidden = false
-        }
+        progressView.isHidden = !props.isLoading
         
-        emptyDatasetLabel.isHidden = !tableView.isHidden
+        messageLabel.text = "There is no movies."
+        errorTitleLabel.isHidden = true
+        if case .failure(let message) = props.status {
+            errorTitleLabel.isHidden = false
+            progressView.isHidden = true
+            messageLabel.text = message
+        }
+
+        tableView.isHidden = true
+        if props.movies.count > 0 {
+            tableView.isHidden = false
+            tableView.reloadData()
+        }
+
+        messageLabel.isHidden = !tableView.isHidden
     }
     
-    private func alert(_ message: String) {
-        let alert = UIAlertController(
-            title: "ERROR",
-            message: message,
-            preferredStyle: .alert
-        )
-        present(alert, animated: true)
-    }
+    
     private var movies: [PopularMoviesProps.Movie] {
         return props?.movies ?? []
     }

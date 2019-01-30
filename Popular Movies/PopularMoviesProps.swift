@@ -6,12 +6,12 @@ struct PopularMoviesProps  {
     let movies: [Movie]
     let status: Status
     
+    let refresh: PlainCommand?
+    
     enum Status {
-        case empty
         case loading
-        case loadingPage
-        case success(loadNextPage: PlainCommand?)
-        case failure(reload: PlainCommand?, error: String)
+        case loaded(loadNextPage: PlainCommand?)
+        case failure(error: String)
     }
     
     struct Movie {
@@ -22,14 +22,20 @@ struct PopularMoviesProps  {
     }
 }
 
-// MARK: Prism
+// MARK: Prisms
 extension PopularMoviesProps {
     
+    /// Prism is a convenient way to access data inside the props
+    
+    /// Returns the command to load next page or nil
     var loadNextPage: PlainCommand? {
-        if case .success(let loadNextPage) = self.status {
-            return loadNextPage
-        }
-        return nil
+        guard  case .loaded(let loadNextPage) = self.status else { return nil }
+        return loadNextPage
+    }
+    
+    var isLoading: Bool {
+        guard case .loading = self.status else { return false }
+        return true
     }
     
 }

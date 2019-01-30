@@ -128,5 +128,19 @@ enum PopularMoviesShowCase {
                 overview: "Batman\'s first stand-alone appearance in the DC Extended Universe."
             )
         ],
-        status: .success(loadNextPage: nil))
+        status: .loading,
+        refresh: nil
+    )
+    
+    static let firstPageEmpty = PopularMoviesProps(
+        movies: [],
+        status: .loaded(loadNextPage: nil),
+        refresh: nil
+    )
+    
+    static let firstPageError = PopularMoviesProps(
+        movies: [],
+        status: .failure(error: "[AXMediaCommon] Unexpected physical screen orientation"),
+        refresh: nil
+    )
 }
