@@ -1,5 +1,6 @@
 
 import UIKit
+import Nuke
 
 class MovieTableViewCell: UITableViewCell {
     
@@ -32,6 +33,15 @@ class MovieTableViewCell: UITableViewCell {
         nameLabel.text = props.name
         overviewLabel.text = props.overview
         releaseYearLabel.text = yearString(from: props.released)
+        if let imageURL = props.poster {
+            Nuke.loadImage(
+                with: imageURL,
+                options: ImageLoadingOptions(
+                    transition: .fadeIn(duration: 0.33)
+                ),
+                into: posterImageView
+            )
+        }
     }
     
 }
