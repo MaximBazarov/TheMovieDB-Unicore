@@ -137,6 +137,7 @@
                                             <outlet property="overviewLabel" destination="hUb-pg-U0e" id="qjI-n7-4fN"/>
                                             <outlet property="posterImageView" destination="cK5-Pw-xrf" id="xYI-em-FvH"/>
                                             <outlet property="releaseYearLabel" destination="DGq-J2-1Gi" id="OdI-eS-M6J"/>
+                                            <segue destination="dwM-Mq-pua" kind="show" id="Qwr-hv-xS5"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -184,7 +185,6 @@
                         <outlet property="messageLabel" destination="iW6-y1-87d" id="CvJ-Ua-NeD"/>
                         <outlet property="progressView" destination="dpI-O5-1Za" id="Cn0-QF-P6Q"/>
                         <outlet property="tableView" destination="6Nn-Jj-YA7" id="U0a-vB-sKU"/>
-                        <segue destination="dwM-Mq-pua" kind="show" identifier="showMovieDetails" id="uEr-zi-gVo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G58-Oe-aL3" sceneMemberID="firstResponder"/>
