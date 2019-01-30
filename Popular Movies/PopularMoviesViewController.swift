@@ -65,7 +65,23 @@ class PopularMoviesViewController: UIViewController {
         return movies.count
     }
     
+    private var selectedMovie: MovieDetailsProps?
     private func selectMovie(at index: Int) {
+        selectedMovie = movie(at: index).map{ movie in
+            return MovieDetailsProps(
+                poster: movie.poster,
+                name: movie.name,
+                released: movie.released,
+                overview: movie.overview)
+        }
+        performSegue(withIdentifier: "showMovieDetails", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let details = segue.destination as? MovieDetailsViewController {
+            details.props = selectedMovie
+        }
     }
     
     private func loadNextPage() {

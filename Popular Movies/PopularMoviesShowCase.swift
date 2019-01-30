@@ -128,7 +128,7 @@ enum PopularMoviesShowCase {
                 overview: "Batman\'s first stand-alone appearance in the DC Extended Universe."
             )
         ],
-        status: .loading,
+        status: .loaded(loadNextPage: nil),
         refresh: nil
     )
     
