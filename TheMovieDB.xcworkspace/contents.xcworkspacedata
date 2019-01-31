@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/maxim.bazarov/code/TheMovieDB-Unicore/PopularMoviesViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:TheMovieDB.xcodeproj">
    </FileRef>
    <FileRef

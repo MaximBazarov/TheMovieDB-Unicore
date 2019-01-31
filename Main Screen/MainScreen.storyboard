@@ -37,10 +37,10 @@
             </objects>
             <point key="canvasLocation" x="847" y="42"/>
         </scene>
-        <!--MoviesList-->
+        <!--PopularMovies-->
         <scene sceneID="T3m-Dm-g8C">
             <objects>
-                <viewControllerPlaceholder storyboardName="MoviesList" id="l0g-C0-MIP" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="PopularMovies" id="l0g-C0-MIP" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="Wby-WN-b9V"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LbA-gW-IRO" userLabel="First Responder" sceneMemberID="firstResponder"/>
