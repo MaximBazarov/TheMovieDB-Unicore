@@ -1,11 +1,12 @@
 
 import UIKit
+import Nuke
 
 class MovieTableViewCell: UITableViewCell {
     
     static let identifier: String = "MovieCell"
     
-    var props: PopularMoviesProps.Movie? {
+    var props = Props.initial {
         didSet {
             render()
         }
@@ -23,12 +24,24 @@ class MovieTableViewCell: UITableViewCell {
         releaseYearLabel.layer.cornerRadius = 2
     }
 
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        props.select.execute()
+    }
+    
     private func render() {
-        guard let props = props else { return }
         nameLabel.text = props.name
         overviewLabel.text = props.overview
-        let year = Calendar.current.component(.year, from: props.released)
-        releaseYearLabel.text = String(year)
+        releaseYearLabel.text = yearString(from: props.released)
+        if let imageURL = props.poster {
+            Nuke.loadImage(
+                with: imageURL,
+                options: ImageLoadingOptions(
+                    transition: .fadeIn(duration: 0.33)
+                ),
+                into: posterImageView
+            )
+        }
     }
     
 }
