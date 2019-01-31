@@ -1,7 +1,7 @@
 
 import UIKit
 
-class PopularMoviesViewController: UIViewController {
+class MoviesListViewController: UIViewController {
     
     var props = Props.firstPageShowCase {
         didSet {
@@ -61,7 +61,7 @@ class PopularMoviesViewController: UIViewController {
 }
 
 
-extension PopularMoviesViewController: UITableViewDataSource {
+extension MoviesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return props.movies.count
     }
@@ -75,7 +75,7 @@ extension PopularMoviesViewController: UITableViewDataSource {
     
 }
 
-extension PopularMoviesViewController: UITableViewDelegate {
+extension MoviesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == props.movies.count - 7 {

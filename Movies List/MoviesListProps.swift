@@ -3,7 +3,7 @@
 import UIKit
 
 
-extension PopularMoviesViewController {
+extension MoviesListViewController {
     
     struct Props  {
         
@@ -29,9 +29,9 @@ extension PopularMoviesViewController {
     
 }
 
-extension PopularMoviesViewController.Props {
+extension MoviesListViewController.Props {
     
-    static let initial = PopularMoviesViewController.Props.init(
+    static let initial = MoviesListViewController.Props.init(
         movies: [],
         status: .loaded(loadNextPage: nil),
         refresh: nil,
@@ -41,7 +41,7 @@ extension PopularMoviesViewController.Props {
 }
 
 // MARK: - Prisms
-extension PopularMoviesViewController.Props {
+extension MoviesListViewController.Props {
     
     /// Prism is a convenient way to access data inside the props
     
@@ -60,9 +60,9 @@ extension PopularMoviesViewController.Props {
 
 
 // MARK: - Show cases
-extension PopularMoviesViewController.Props {
+extension MoviesListViewController.Props {
     
-    static let firstPageShowCase = PopularMoviesViewController.Props(
+    static let firstPageShowCase = MoviesListViewController.Props(
         movies: [
             MovieTableViewCell.Props(
                 poster: URL(string: "http://image.tmdb.org/t/p/w780/kBf3g9crrADGMc2AMAMlLBgSm2h.jpg")!,
