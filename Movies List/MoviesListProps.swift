@@ -18,13 +18,6 @@ extension MoviesListViewController {
             case loaded(loadNextPage: PlainCommand?)
             case failure(error: String)
         }
-        
-        struct Movie {
-            let poster: URL?
-            let name: String
-            let released: Date
-            let overview: String
-        }
     }
     
 }
