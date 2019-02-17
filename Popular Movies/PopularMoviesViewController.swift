@@ -1,8 +1,16 @@
 
 
 import UIKit
+import Command
+
 
 class PopularMoviesViewController: UIViewController {
+    
+    struct Props {
+        let connectMoviesList: CommandOf<UIViewController>
+        
+        static let initial = Props(connectMoviesList: CommandOf<UIViewController>{ _ in })
+    }
 
     var props = Props.initial
 

@@ -1,40 +1,17 @@
 
 
 import UIKit
-
-extension SearchViewController {
-    
-    struct Props {
-        
-        let query: String
-        let suggestions: [String]
-        
-        let search: Command<String>
-        let connectMoviesList: Command<UIViewController>
-    }
-    
-}
-
-extension SearchViewController.Props {
-    
-    static let initial = SearchViewController.Props(
-        query: "",
-        suggestions: [],
-        search: Command<String>{ _ in },
-        connectMoviesList: Command<UIViewController>{ _ in }
-    )
-}
-
+import Command
 
 extension SearchViewController.Props {
     
     static let showCase = SearchViewController.Props(
         query: "",
         suggestions: ["Batman", "Robin", "Terminator"],
-        search: Command<String>{ query in
+        search: CommandOf<String>{ query in
             print("SEARCH: \(query)")
         },
-        connectMoviesList: Command<UIViewController>{ moviesList in
+        connectMoviesList: CommandOf<UIViewController>{ moviesList in
             guard let moviesList = moviesList as? MoviesListViewController else {
                 fatalError("\(#function) requires a controller to be a MoviesListViewController")
             }

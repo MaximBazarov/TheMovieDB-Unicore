@@ -1,13 +1,30 @@
 
 
 import UIKit
+import Command
 
 class SearchViewController: UIViewController {
+    
+    struct Props {
+        
+        let query: String
+        let suggestions: [String]
+        
+        let search: CommandOf<String>
+        let connectMoviesList: CommandOf<UIViewController>
+        
+        
+        static let initial = SearchViewController.Props(
+            query: "",
+            suggestions: [],
+            search: CommandOf<String>{ _ in },
+            connectMoviesList: CommandOf<UIViewController>{ _ in }
+        )
+    }
     
     var props = Props.showCase {
         didSet {}
     }
-    
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var suggestionsTableView: UITableView!

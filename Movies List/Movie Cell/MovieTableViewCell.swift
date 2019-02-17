@@ -1,10 +1,30 @@
 
 import UIKit
 import Nuke
+import Command
 
 class MovieTableViewCell: UITableViewCell {
     
     static let identifier: String = "MovieCell"
+    
+    struct Props: Equatable {
+        
+        let poster: URL?
+        let name: String
+        let released: Date
+        let overview: String
+        
+        let select: Command
+        
+        
+        static let initial = MovieTableViewCell.Props(
+            poster: nil,
+            name: "",
+            released: Date(),
+            overview: "",
+            select: Command{}
+        )
+    }
     
     var props = Props.initial {
         didSet {
@@ -23,7 +43,7 @@ class MovieTableViewCell: UITableViewCell {
         releaseYearLabel.layer.borderWidth = 0.5
         releaseYearLabel.layer.cornerRadius = 2
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         props.select.execute()
