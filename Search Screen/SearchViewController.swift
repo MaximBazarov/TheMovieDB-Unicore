@@ -23,7 +23,10 @@ class SearchViewController: UIViewController {
     }
     
     var props = Props.showCase {
-        didSet {}
+        didSet {
+            guard isViewLoaded else { return }
+            view.setNeedsLayout()
+        }
     }
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -32,6 +35,12 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.titleView = searchBar
+        render()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        render()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,8 +49,14 @@ class SearchViewController: UIViewController {
         }
     }
 
-}
+    
+    // MARK: - Render
+    
+    func render() {
+        searchBar.text = props.query
+    }
 
+}
 
 
 // MARK: - UISearchBarDelegate

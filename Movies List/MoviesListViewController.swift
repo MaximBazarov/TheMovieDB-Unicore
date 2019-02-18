@@ -26,6 +26,7 @@ class MoviesListViewController: UIViewController {
         )
     }
     
+    /// this fakes props updates every second, to test the performance of render
     let fakeProps = FakeProps(); class FakeProps {
         
         func fake(vc: MoviesListViewController) {
@@ -66,7 +67,13 @@ class MoviesListViewController: UIViewController {
         render()
     }
     
+    
+    // MARK: - Render
+    
+    /// you need to save old movies to skip a tableview data reloading when
+    /// the movies collection haven't changed
     private var oldMovies = [MovieTableViewCell.Props]()
+    
     private func render() {
         progressView.isHidden = !props.isLoading
         
