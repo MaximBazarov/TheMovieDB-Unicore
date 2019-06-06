@@ -6,6 +6,7 @@ target 'TheMovieDB' do
 
   pod 'Nuke'
   pod 'Command'
+  pod 'Unicore'
 
   target 'TheMovieDBTests' do
     inherit! :search_paths
