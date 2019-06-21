@@ -20,8 +20,10 @@ class TheMovieDBAPITests: XCTestCase {
         TheMovieDBAPI(session: sessionMock).search(
             query: "test query with spaces",
             page: 1,
-            success: { _ in exp.fulfill() },
-            failure: { error in XCTFail("\(error)")}
+            result: { r in
+                if case .success(_) = r { exp.fulfill() }
+                if case let .failure(error) = r { XCTFail("\(error)") }
+            }
         )
         
         waitForExpectations(timeout: 1, handler: nil)
@@ -35,12 +37,12 @@ class TheMovieDBAPITests: XCTestCase {
         
         TheMovieDBAPI(session: sessionMock).discover(
             page: 1,
-            success: { response in
-                guard response.results.count  == 20 else { return XCTFail("") }
-                exp.fulfill()
-            },
-            failure: { error in
-                XCTFail("\(error)")
+            result: { r in
+                if case let .success(response) = r {
+                    guard response.results.count  == 20 else { return XCTFail("") }
+                    exp.fulfill()
+                }
+                if case let .failure(error) = r { XCTFail("\(error)") }
             }
         )
         
@@ -55,12 +57,12 @@ class TheMovieDBAPITests: XCTestCase {
         TheMovieDBAPI(session: sessionMock).search(
             query: "movie",
             page: 1,
-            success: { response in
-                guard response.results.count  == 20 else { return XCTFail("") }
-                exp.fulfill()
-            },
-            failure: { error in
-                XCTFail("\(error)")
+            result: { r in
+                if case let .success(response) = r {
+                    guard response.results.count  == 20 else { return XCTFail("") }
+                    exp.fulfill()
+                }
+                if case let .failure(error) = r { XCTFail("\(error)") }
             }
         )
         
@@ -78,12 +80,14 @@ class TheMovieDBAPITests: XCTestCase {
         
         TheMovieDBAPI(session: sessionMock).discover(
             page: 1,
-            success: { response in
-                XCTFail("Must be a currupted data erorr")
-            },
-            failure: { error in
-                if case .curruptedData = error { exp.fulfill() }
-                else { XCTFail("\(error)") }
+            result: { r in
+                if case .success(_) = r {
+                    XCTFail("Must be a currupted data erorr")
+                }
+                if case let .failure(error) = r {
+                    if case .curruptedData = error { exp.fulfill() }
+                    else { XCTFail("\(error)") }
+                }
             }
         )
         
@@ -98,12 +102,14 @@ class TheMovieDBAPITests: XCTestCase {
         TheMovieDBAPI(session: sessionMock).search(
             query: "movie",
             page: 1,
-            success: { response in
-                XCTFail("Must be a currupted data erorr")
-            },
-            failure: { error in
-                if case .curruptedData = error { exp.fulfill() }
-                else { XCTFail("\(error)") }
+            result: { r in
+                if case .success(_) = r {
+                    XCTFail("Must be a currupted data erorr")
+                }
+                if case let .failure(error) = r {
+                    if case .curruptedData = error { exp.fulfill() }
+                    else { XCTFail("\(error)") }
+                }
             }
         )
         waitForExpectations(timeout: 1, handler: nil)
@@ -119,13 +125,15 @@ class TheMovieDBAPITests: XCTestCase {
         
         TheMovieDBAPI(session: sessionMock).discover(
             page: 1,
-            success: { response in
-                XCTFail("Must be a currupted data erorr")
-        },
-            failure: { error in
-                if case .curruptedData = error { exp.fulfill() }
-                else { XCTFail("\(error)") }
-        }
+            result: { r in
+                if case .success(_) = r {
+                    XCTFail("Must be a currupted data erorr")
+                }
+                if case let .failure(error) = r {
+                    if case .curruptedData = error { exp.fulfill() }
+                    else { XCTFail("\(error)") }
+                }
+            }
         )
         
         waitForExpectations(timeout: 1, handler: nil)
@@ -139,13 +147,15 @@ class TheMovieDBAPITests: XCTestCase {
         TheMovieDBAPI(session: sessionMock).search(
             query: "movie",
             page: 1,
-            success: { response in
-                XCTFail("Must be a currupted data erorr")
-        },
-            failure: { error in
-                if case .curruptedData = error { exp.fulfill() }
-                else { XCTFail("\(error)") }
-        }
+            result: { r in
+                if case .success(_) = r {
+                    XCTFail("Must be a currupted data erorr")
+                }
+                if case let .failure(error) = r {
+                    if case .curruptedData = error { exp.fulfill() }
+                    else { XCTFail("\(error)") }
+                }
+            }
         )
         waitForExpectations(timeout: 1, handler: nil)
         
@@ -160,13 +170,15 @@ class TheMovieDBAPITests: XCTestCase {
         
         TheMovieDBAPI(session: sessionMock).discover(
             page: 1,
-            success: { response in
-                XCTFail("Must be a currupted data erorr")
-        },
-            failure: { error in
-                if case .curruptedData = error { exp.fulfill() }
-                else { XCTFail("\(error)") }
-        }
+            result: { r in
+                if case .success(_) = r {
+                    XCTFail("Must be a currupted data erorr")
+                }
+                if case let .failure(error) = r {
+                    if case .curruptedData = error { exp.fulfill() }
+                    else { XCTFail("\(error)") }
+                }
+            }
         )
         
         waitForExpectations(timeout: 1, handler: nil)
@@ -180,13 +192,15 @@ class TheMovieDBAPITests: XCTestCase {
         TheMovieDBAPI(session: sessionMock).search(
             query: "movie",
             page: 1,
-            success: { response in
-                XCTFail("Must be a currupted data erorr")
-        },
-            failure: { error in
-                if case .curruptedData = error { exp.fulfill() }
-                else { XCTFail("\(error)") }
-        }
+            result: { r in
+                if case .success(_) = r {
+                    XCTFail("Must be a currupted data erorr")
+                }
+                if case let .failure(error) = r {
+                    if case .curruptedData = error { exp.fulfill() }
+                    else { XCTFail("\(error)") }
+                }
+            }
         )
         waitForExpectations(timeout: 1, handler: nil)
         

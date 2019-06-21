@@ -46,15 +46,14 @@ extension TheMovieDBAPI {
     ///   - failure: callback
     func discover(
         page: Int,
-        success: @escaping (MoviesListResponse) -> Void,
-        failure: @escaping (APIError) -> Void)
+        result: @escaping (Result<MoviesListResponse,APIError>) -> Void)
     {
         
         // hardcoded for simplicity, in real project it would be request builder
         let endpoint = baseURL + "discover/movie?sort_by=popularity.desc&api_key=\(apiKEY)&page=\(page)"
         let url = URL(string: endpoint)!
         let discoverRequest = URLRequest(url: url)
-        request(discoverRequest, success: success, failure: failure)
+        request(discoverRequest, result: result)
     }
     
     
@@ -67,19 +66,23 @@ extension TheMovieDBAPI {
     ///   - failure: callback
     func search(
         query: String, page: Int,
-        success: @escaping (MoviesListResponse) -> Void,
-        failure: @escaping (APIError) -> Void)
+        result: @escaping (Result<MoviesListResponse,APIError>) -> Void)
     {
         
         // hardcoded for simplicity, in real project it would be request builder
-        guard let percentEncodedQuery =  query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-            else { return failure(.badQuery(query)) }
+        guard let percentEncodedQuery =  query
+            .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+            else {
+                return result(.failure(.badQuery(query)))
+        }
         let endpoint = baseURL + "search/movie?api_key=\(apiKEY)&language=en-US&query=\(percentEncodedQuery)&page=\(page)&include_adult=false"
-        guard let url = URL(string: endpoint) else { return failure(.badQuery(query)) }
+        guard let url = URL(string: endpoint) else {
+            return result(.failure(.badQuery(query)))
+        }
         
         let searchRequest = URLRequest(url: url)
         
-        request(searchRequest, success: success, failure: failure)
+        request(searchRequest, result: result)
     }
     
 }
@@ -91,17 +94,16 @@ extension TheMovieDBAPI {
     
     private func request(
         _ request: URLRequest,
-        success: @escaping (MoviesListResponse) -> Void,
-        failure: @escaping (APIError) -> Void)
+        result: @escaping (Result<MoviesListResponse,APIError>) -> Void)
     {
         let task = session.dataTask(with: request) { (data, response, error) in
             if let error = error {
-                failure(.networkError(error))
+                result(.failure(.networkError(error)))
                 return
             }
             
             guard let data = data else {
-                failure(.emptyResult)
+                result(.failure(.emptyResult))
                 return
             }
             
@@ -110,10 +112,10 @@ extension TheMovieDBAPI {
                     MoviesListResponse.self,
                     from: data
                 )
-                success(value)
+                result(.success(value))
             } catch {
                 print(error)
-                failure(.curruptedData(error))
+                result(.failure(.curruptedData(error)))
             }
         }
         task.resume()
