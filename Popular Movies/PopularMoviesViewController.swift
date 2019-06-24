@@ -6,7 +6,7 @@ import Command
 
 class PopularMoviesViewController: UIViewController {
     
-    struct Props {
+    struct Props {  
         let connectMoviesList: CommandOf<UIViewController>
         
         static let initial = Props(connectMoviesList: CommandOf<UIViewController>{ _ in })

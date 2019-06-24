@@ -3,7 +3,14 @@ import UIKit
 import Nuke
 
 class MovieDetailsViewController: UIViewController {
-    
+
+    struct Props {
+        let poster: URL?
+        let name: String
+        let released: Date
+        let overview: String
+    }
+
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var overviewLabel: UILabel!
@@ -15,6 +22,7 @@ class MovieDetailsViewController: UIViewController {
             render()
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         render()

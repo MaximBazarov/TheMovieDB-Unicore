@@ -1,17 +1,6 @@
 
 import Foundation
 
-extension MovieDetailsViewController {
-
-    struct Props {
-        let poster: URL?
-        let name: String
-        let released: Date
-        let overview: String
-    }
-    
-}
-
 
 
 extension MovieDetailsViewController.Props {
