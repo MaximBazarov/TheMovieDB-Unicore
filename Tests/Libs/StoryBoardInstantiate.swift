@@ -11,7 +11,7 @@ extension UIStoryboard {
 
     static func instantiateInitial<VC: UIViewController>(vc vcClass: VC.Type, storyboardName: String? = nil) -> VC {
         let name = storyboardName ?? String(describing: vcClass)
-        return viewController = UIStoryboard(
+        return UIStoryboard(
             name: name,
             bundle: Bundle(for: vcClass)
         ).instantiateInitialViewController() as! VC

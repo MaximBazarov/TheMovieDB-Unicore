@@ -8,45 +8,40 @@
 
 import XCTest
 import UIKit
+import Nuke
 import SnappyShrimp
 
 @testable import TheMovieDB
-
 
 class MoviesListSnapshotTests: SnapshotTest {
 
     override func setUp() {
         super.setUp()
-        self.recordMode = true; // set to true to create a new referencing images, false to test
-    }
-
-        // Note: Current refs were written on lates devices (iPhone 8/8Plus, iPad 12 Pro).
-        // Due to differences in devices, that you can't override, don't change testing devices, unless you want to override refs.
-        func testExample() {
-            let vc = UIStoryboard.instantiateInitial(
-                vc: MainScreenViewController.self,
-                storyboardName: "MainScreen"
+        let path = Bundle(for: MoviesListSnapshotTests.self)
+            .path(forResource: "movie-poster-mock", ofType: "jpg")
+        let moviePoster  = try! Data(contentsOf: URL(fileURLWithPath: path!))
+        ImagePipeline.shared = ImagePipeline(defaultFile: MockDataLoading.File(
+            data: nil,
+            mimeType: .jpeg
+        ), dataCollection: [
+            "https://valid.image.mock.com/image.jpg" : MockDataLoading.File(
+                data: moviePoster,
+                mimeType: .jpeg
             )
-            //Has to be launched on iPhone with @2 scale and P3 screen
-            verify(vc, for: Device.iPhone8.landscape)
-            verify(vc, for: Device.iPhone8.portrait)
-            verify(vc, for: Device.iPhoneSE.portrait)
-
-
-            //Has to be launched on iPhone with @3 scale and P3 screen
-            verify(vc, for: Device.iPhone8Plus.landscape)
-            verify(vc, for: Device.iPhone8Plus.portrait)
-
-            //Has to be launched on any iPad with @2 scale and sRGB screen
-            verify(vc, for: Device.iPadPro12_9.portrait.fullScreen)
-            verify(vc, for: Device.iPadPro12_9.portrait.oneThird)
-            verify(vc, for: Device.iPadPro12_9.portrait.twoThirds)
-
-
-            //Has to be launched on iPhone with @3 scale and P3 screen
-            verify(vc, for: Device.iPhoneX.portrait)
-            verify(vc, for: Device.iPhoneX.landscapeLeft)
-            verify(vc, for: Device.iPhoneX.landscapeRight)
-
-        }
+        ])
     }
+
+    func testMoviesList() {
+        let vc = UIStoryboard.instantiateInitial(
+            vc: MoviesListViewController.self,
+            storyboardName: "MoviesList"
+        )
+
+        vc.props = mockMoviesListProps
+
+        verify(vc, for: Device.iPhoneXR.portrait, delay: 1)
+        verify(vc, for: Device.iPhoneXR.landscapeLeft)
+        verify(vc, for: Device.iPhoneXR.landscapeRight)
+    }
+
+}
