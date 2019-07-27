@@ -26,22 +26,6 @@ class MoviesListViewController: UIViewController {
         )
     }
     
-    /// this fakes props updates every second, to test the performance of render
-    let fakeProps = FakeProps(); class FakeProps {
-        
-        func fake(vc: MoviesListViewController) {
-            DispatchQueue.global(qos: .background).async {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [unowned vc] in
-                    vc.props = Props.firstPageShowCase
-                    DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.1) { [unowned self] in
-                        self.fake(vc: vc)
-                    }
-                }
-            }
-            
-        }
-    }
-    
     var props = Props.firstPageShowCase {
         didSet {
             guard isViewLoaded else { return }
@@ -56,12 +40,7 @@ class MoviesListViewController: UIViewController {
     @IBAction func reloadButtonAction(_ sender: Any) {
         props.refresh?.execute()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fakeProps.fake(vc: self)
-    }
-    
+        
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         render()
