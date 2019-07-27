@@ -5,17 +5,6 @@ import Foundation
 
 extension MovieDetailsViewController.Props {
     
-    static let initial = MovieDetailsViewController.Props(
-        poster: nil,
-        name: "",
-        released: Date(),
-        overview: ""
-    )
-    
-}
-
-extension MovieDetailsViewController.Props {
-    
     static let showCase = MovieDetailsViewController.Props(
         poster: URL(string: "http://image.tmdb.org/t/p/w780/kBf3g9crrADGMc2AMAMlLBgSm2h.jpg")!,
         name: "Batman",

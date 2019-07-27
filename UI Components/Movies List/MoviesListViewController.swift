@@ -96,8 +96,10 @@ class MoviesListViewController: UIViewController {
     }
     
     
-    private func movie(at index: Int) -> MovieTableViewCell.Props? {
-        guard props.movies.indices.contains(index) else { return nil }
+    private func movie(at index: Int) -> MovieTableViewCell.Props {
+        guard props.movies.indices.contains(index) else {
+            fatalError("MoviesListViewController index is out of bounds")
+        }
         return props.movies[index]
     }
     
@@ -141,7 +143,7 @@ extension MoviesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let movie = self.movie(at: indexPath.row)!
+        let movie = self.movie(at: indexPath.row)
         let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier) as! MovieTableViewCell
         cell.props = movie
         return cell

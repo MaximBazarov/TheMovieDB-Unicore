@@ -2,6 +2,7 @@
 import UIKit
 import Nuke
 
+
 class MovieDetailsViewController: UIViewController {
 
     struct Props {
@@ -9,8 +10,15 @@ class MovieDetailsViewController: UIViewController {
         let name: String
         let released: Date
         let overview: String
-    }
 
+        static let initial = MovieDetailsViewController.Props(
+            poster: nil,
+            name: "",
+            released: Date(),
+            overview: ""
+        )
+    }
+    
     @IBOutlet var posterImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var overviewLabel: UILabel!
@@ -42,7 +50,7 @@ class MovieDetailsViewController: UIViewController {
             )
         }
     }
-        
+
 }
 
 
