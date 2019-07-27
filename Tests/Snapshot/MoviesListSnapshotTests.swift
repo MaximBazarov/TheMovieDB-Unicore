@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import UIKit
 import SnappyShrimp
 
 @testable import TheMovieDB
@@ -14,14 +15,23 @@ import SnappyShrimp
 
 class MoviesListSnapshotTests: SnapshotTest {
 
+    override func setUp() {
+        super.setUp()
+        self.recordMode = true; // set to true to create a new referencing images, false to test
+    }
+
         // Note: Current refs were written on lates devices (iPhone 8/8Plus, iPad 12 Pro).
         // Due to differences in devices, that you can't override, don't change testing devices, unless you want to override refs.
         func testExample() {
-            let vc = MoviesListViewController()
+            let vc = UIStoryboard.instantiateInitial(
+                vc: MainScreenViewController.self,
+                storyboardName: "MainScreen"
+            )
             //Has to be launched on iPhone with @2 scale and P3 screen
             verify(vc, for: Device.iPhone8.landscape)
             verify(vc, for: Device.iPhone8.portrait)
             verify(vc, for: Device.iPhoneSE.portrait)
+
 
             //Has to be launched on iPhone with @3 scale and P3 screen
             verify(vc, for: Device.iPhone8Plus.landscape)
@@ -37,5 +47,6 @@ class MoviesListSnapshotTests: SnapshotTest {
             verify(vc, for: Device.iPhoneX.portrait)
             verify(vc, for: Device.iPhoneX.landscapeLeft)
             verify(vc, for: Device.iPhoneX.landscapeRight)
+
         }
     }
