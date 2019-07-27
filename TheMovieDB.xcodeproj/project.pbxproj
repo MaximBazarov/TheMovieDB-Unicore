@@ -223,6 +223,13 @@
 			path = ShowCase;
 			sourceTree = "<group>";
 		};
+		D228983022EC3E2900038F33 /* Snapshot */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Snapshot;
+			sourceTree = "<group>";
+		};
 		D2E218F8220D93160055D1BC /* Movies List */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,6 +303,7 @@
 		E1CFFEAD2200543F00D90739 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D228983022EC3E2900038F33 /* Snapshot */,
 				A93971F122A93F9D0055D134 /* API */,
 				A93971EF22A93F8A0055D134 /* TheMovieDBTests.swift */,
 				E1CFFEB02200543F00D90739 /* Info.plist */,
@@ -350,6 +358,7 @@
 				E1CFFEA62200543F00D90739 /* Sources */,
 				E1CFFEA72200543F00D90739 /* Frameworks */,
 				E1CFFEA82200543F00D90739 /* Resources */,
+				2A151F0B574B4C6522D2544B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -429,6 +438,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2A151F0B574B4C6522D2544B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheMovieDBTests/Pods-TheMovieDBTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TheMovieDBTests/Pods-TheMovieDBTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TheMovieDBTests/Pods-TheMovieDBTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		56E34362908C9273FC4F325B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -708,7 +734,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B03F3F0F40851C9120D437A3 /* Pods-TheMovieDBTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -730,7 +755,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6576D866934AC11B683FA705 /* Pods-TheMovieDBTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";

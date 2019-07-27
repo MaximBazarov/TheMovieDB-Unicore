@@ -10,7 +10,7 @@ target 'TheMovieDB' do
 
   target 'TheMovieDBTests' do
     inherit! :search_paths
-    
+    pod 'SnappyShrimp'
   end
 
 end
